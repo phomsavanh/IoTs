@@ -1,0 +1,65 @@
+{
+  "main": {
+    "all": "ເຊັນເຊີທັງໝົດ",
+    "h&t": "ຄວາມຊຸ່ມໃນອາກາດ & ອຸນຫະພູມ",
+    "l&m": "ແສງ & ຄວາມຊຸ່ມໃນດິນ",
+    "showStandard": "ຄ່າຄວາມຊຸ່ມໃນດິນທີ່ຕັ້ງໄວ້ແມ່ນ"
+  },
+  "moisture": {
+    "labelStandard": "ກຳນົດຄ່າມາດຕະຖາຄວາມຊຸ່ມໃນດິນ",
+    "title": "ຄວາມຊຸ່ມໃນດິນ",
+    "moistureOne": "ເຊັນເຊີຄວາມຊຸ່ມໃນດິນທີ 1",
+    "moistureTwo": "ເຊັນເຊີຄວາມຊຸ່ມໃນດິນທີ 2",
+    "moistureThree": "ເຊັນເຊີຄວາມຊຸ່ມໃນດິນທີ 3"
+  },
+  "allSensor": {
+    "humidity": "ຄວາມຊຸ່ມໃນອາກາດ",
+    "light": "ແສງ",
+    "temperature": "ອຸນຫະພູມ",
+    "in": "ໃນໂຮງເຮືອນ",
+    "out": "ນອກໂຮງເຮືອນ"
+  },
+  "button": {
+    "btnSet": "ຕັ້ງຄ່າ",
+    "btnReset": "ຄ່າເລີ່ມຕົ້ນ",
+    "btnHumidities": "ຄວາມຊຸຸ່ມໃນອາກາດ",
+    "btnLights": "ແສງ",
+    "btnTemperature": "ອຸນຫະພູມ",
+    "btnMoisture":"ຄວາມຊຸ່ມໃນດິນ"
+  },
+  "valve": {
+    "onValve": "ເປີດນ້ຳ",
+    "offValve": "ປິດນ້ຳ"
+  },
+  "members": {
+    "advisor":"ອາຈານທີ່ປຶກສາ",
+    "seau": {
+      "name": "ພົມສະຫວັນ ຄຳຈັນ",
+      "role": "object Detection & WebApp",
+      "description": ""
+    },
+    "tee": {
+      "name": "ຕີ໋ ຈວງເທວີ",
+      "role": "IoT System & localhub",
+      "description": ""
+    },
+    "suay": {
+      "name": "ສວຍລະອຽດ ພິດສະພອນ",
+      "role": "Document & Design",
+      "description": ""
+    }
+  },
+  "melon": {
+    "analyze": "ວິເຄາະ",
+    "flowers": "ດອກ",
+    "melons": "ໝາກ",
+    "leaves": "ໃບ"
+  },
+  "drawer": {
+    "dashboard": "ໜ້າຫຼັກ",
+    "melon": "ວິເຄາະເມລອນ",
+    "visualization": "ສະຖິຕິ",
+    "about": "ກ່ຽວກັບພວກເຮົາ",
+    "logout": "ອອກລະບົບ"
+  }
+}

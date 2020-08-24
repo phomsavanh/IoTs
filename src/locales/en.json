@@ -1,0 +1,65 @@
+{
+  "main": {
+    "all": "All",
+    "h&t": "Humidties & Temperature",
+    "l&m": "Lights & Moistures",
+    "showStandard": "Moisture value is"
+  },
+  "moisture": {
+    "labelStandard": "Standard Moisture",
+    "title": "Moistures",
+    "moistureOne": "MoistureOne",
+    "moistureTwo": "MoistureTwo",
+    "moistureThree": "MoistureThree"
+  },
+  "allSensor": {
+    "humidity": "Humidity",
+    "light": "Light",
+    "temperature": "Temperature",
+    "in": "Inside House",
+    "out": "Outside House"
+  },
+  "button": {
+    "btnSet": "set",
+    "btnReset": "reset",
+    "btnHumidities": "Humidities",
+    "btnLights": "Lights",
+    "btnTemperature": "Temperatures",
+    "btnMoisture":"Moisture"
+  },
+  "valve": {
+    "onValve": "Valve ON",
+    "offValve": "Valve Off"
+  },
+  "members": {
+    "advisor":"Advisor",
+    "seau": {
+      "name": "Phomsavanh Khamchanh",
+      "role": "object Detection & WebApp",
+      "description": ""
+    },
+    "tee": {
+      "name": "Tee Chaungthavy",
+      "role": "IoT System & localhub",
+      "description": ""
+    },
+    "suay": {
+      "name": "SouaylaAiet Phitsaphone",
+      "role": "Document & Design",
+      "description": ""
+    }
+  },
+  "melon": {
+    "analyze": "Analyzed",
+    "flowers": "Flowers",
+    "melons": "Melons",
+    "leaves": "Leaves"
+  },
+  "drawer": {
+    "dashboard": "Dashboard",
+    "melon": "Melon",
+    "visualization": "Visualization",
+    "about": "About",
+    "logout": "Logout"
+  }
+}

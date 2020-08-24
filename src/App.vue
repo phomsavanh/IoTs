@@ -1,32 +1,52 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <v-app class="main myFont">
+    <div v-if="$store.state.user != 'Guest User'">
+      <myAppBar :user="$store.state.user"></myAppBar>
     </div>
-    <router-view/>
-  </div>
+
+    <v-main class="ma-5">
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
+    </v-main>
+  </v-app>
 </template>
 
+<script>
+import myAppBar from "./components/appBarV2";
+
+export default {
+  name: "App",
+  components: {
+    myAppBar,
+
+  },
+  mounted() {
+    this.url = this.$route.name;
+    this.$router.push("/");
+  },
+  updated() {
+    this.url = this.$route.name;
+    console.log(this.url);
+  },
+  data: () => ({
+    url: "",
+  }),
+};
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.myFont {
+  font-family: 'Mansalva','Noto Sans Lao','Saysettha OT'; 
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
