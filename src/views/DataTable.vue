@@ -51,24 +51,35 @@ export default {
         .collection(this.$route.params.id)
         .onSnapshot((snap) => {
           this.test = [];
-          snap.docs.forEach((element) => {
+          snap.docs.forEach((doc) => {
+            var document = doc.data();
             if (this.$route.params.id == "moistures") {
               this.test.push({
                 one:
-                  element.data()[0] == undefined ? null : element.data()[0].one,
+                  document[0] != undefined?document[0].one:document.one,
                 date:
-                  element.data()[0].date == undefined
-                    ? null
-                    : this.formatDate(element.data()[0].date.seconds *1000),
+                document[0] != undefined
+                    ? document[0].date == undefined
+                      ? 1
+                      : document[0].date.seconds * 1000
+                    : document.date == undefined
+                    ? 1
+                    : document.date.seconds * 1000
               });
             } else {
               this.test.push({
-                in: element.data()[0].in,
-                out: element.data()[0].out,
+                in: document[0] != undefined?document[0].in:document.in,
+                out: document[0] != undefined?document[0].out:document.out,
                 date:
-                  element.data()[0].date == undefined
-                    ? null
-                    :this.formatDate(element.data()[0].date.seconds *1000),
+                  this.formatDate(
+                  document[0] != undefined
+                    ? document[0].date == undefined
+                      ? 1
+                      : document[0].date.seconds * 1000
+                    : document.date == undefined
+                    ? 1
+                    : document.date.seconds * 1000
+                ),
               });
             }
           });

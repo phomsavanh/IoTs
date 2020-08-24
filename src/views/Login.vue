@@ -4,7 +4,7 @@
       <v-card class="mx-auto my-15" max-width="80%" elevation="20">
         <v-row>
           <!-- poster -->
-          <v-col cols="12" md class="d-none d-lg-flex d-xl-none pa-5">
+          <v-col cols="12" md class="d-none d-lg-flex pa-5">
             <v-card-text>
               <v-img
                 src="https://www.crossroadsinfosec.com/wp-content/uploads/2019/02/1_lVfJFrxmv5WYXnfm7Tbf3A.png?quality=100.3017122710591"
@@ -36,6 +36,7 @@
                   class="mb-5"
                   type="email"
                   label="E-mail"
+                  :rules="emailRules"
                   required
                 ></v-text-field>
 
@@ -43,7 +44,7 @@
                   type="password"
                   v-model="password"
                   label="password"
-                  width="50"
+                  :rules="passwordRules"
                   @keyup.enter="signIn()"
                   required
                 ></v-text-field>
@@ -147,10 +148,16 @@ export default {
   data() {
     return {
       email: "",
+       emailRules:[
+        v=>!!v||'E-mail is required',
+        v=> /.+@+/.test(v) || 'E-mail is required',
+      ],
       password: "",
+       passwordRules:[
+        v=>v.length>=6||'password must be at least 6 character'
+      ],
       checkbox: false,
       loading: false,
-      success: false,
     };
   },
 
@@ -164,6 +171,18 @@ export default {
       this.$router.push("/");
     },
     async signIn() {
+      if (this.password.length < 6) {
+        setTimeout(() => {
+            alert("password must be at least 6 character");
+          }, 100);
+          return;
+      }
+      if (!this.email || !this.password) {
+         setTimeout(() => {
+            alert("email or password must not empty");
+          }, 100);
+          return;
+      }
       this.loading = true;
       console.log(this.email, this.password);
       await firebase
@@ -174,11 +193,10 @@ export default {
         })
         .then(() => {
           this.loading = false;
-          this.success = true;
           this.home();
         })
         .catch((err) => {
-          this.loading = false;
+          this.loading = false
           setTimeout(() => {
             alert(err);
           }, 300);

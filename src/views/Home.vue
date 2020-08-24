@@ -4,10 +4,33 @@
       <v-expansion-panel>
         <v-expansion-panel-header
           ><h3>
+            {{ $t("main.quantity") }}
+            {{ this.meterQuantity }}
+          </h3>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <div class="text-center">
+            <v-progress-circular
+              :key="meterRate"
+              :rotate="360"
+              :size="350"
+              :width="15"
+              :value="meterRate"
+              color="teal"
+              :indeterminate="meterRate == 0 ? flow : !flow"
+            >
+              {{ this.meterRate }} {{ $t("main.unit") }}
+            </v-progress-circular>
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-header
+          ><h3>
             {{ $t("main.showStandard") }}
             {{ this.showMoistureValue }}
-          </h3></v-expansion-panel-header
-        >
+          </h3>
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
           <div class="text-center">
             <v-text-field
@@ -18,10 +41,16 @@
               :label="$t('moisture.labelStandard')"
               @keypress.enter="setStandard"
             ></v-text-field>
-            <v-btn class="mr-5" color="error" @click="reset" :loading="loading"
-              >{{$t("button.btnReset")}}</v-btn
+            <v-btn
+              class="mr-5"
+              color="error"
+              @click="reset"
+              :loading="loading"
+              >{{ $t("button.btnReset") }}</v-btn
             >
-            <v-btn color="success" @click="setStandard">{{$t("button.btnSet")}}</v-btn>
+            <v-btn color="success" @click="setStandard">{{
+              $t("button.btnSet")
+            }}</v-btn>
           </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -90,6 +119,7 @@
                 >
                   <Gauge
                     name="g3"
+                    max="200"
                     :key="this.inHumidities"
                     :value="this.inHumidities"
                   ></Gauge>
@@ -98,11 +128,13 @@
               <v-col cols="6" md="3">
                 <Card
                   avar="H"
+                  max="200"
                   :title="$t('allSensor.humidity')"
                   :subtitle="$t('allSensor.out')"
                 >
                   <Gauge
                     name="g2"
+                    max="200"
                     :key="this.outHumidities"
                     :value="this.outHumidities"
                   ></Gauge
@@ -111,11 +143,13 @@
               <v-col cols="6" md="3">
                 <Card
                   avar="T"
+                  max="200"
                   :title="$t('allSensor.temperature')"
                   :subtitle="$t('allSensor.in')"
                 >
                   <Gauge
                     name="g1"
+                    max="200"
                     :key="this.inTemp"
                     :value="this.inTemp"
                   ></Gauge>
@@ -124,11 +158,13 @@
               <v-col cols="6" md="3">
                 <Card
                   avar="T"
+                  max="200"
                   :title="$t('allSensor.temperature')"
                   :subtitle="$t('allSensor.out')"
                 >
                   <Gauge
                     name="g4"
+                    max="200"
                     :key="this.outTemp"
                     :value="this.outTemp"
                   ></Gauge>
@@ -147,47 +183,73 @@
             <v-col cols="6" md="3">
               <Card
                 avar="L"
+                max="200"
                 :title="$t('allSensor.light')"
                 :subtitle="$t('allSensor.in')"
               >
                 <Gauge
                   name="g5"
+                  max="200"
                   :key="this.inLight"
                   :value="this.inLight"
                 ></Gauge>
               </Card>
             </v-col>
             <v-col cols="6" md="3">
-              <Card avar="L" :title="$t('allSensor.light')" :subtitle="$t('allSensor.out') ">
+              <Card
+                avar="L"
+                max="200"
+                :title="$t('allSensor.light')"
+                :subtitle="$t('allSensor.out')"
+              >
                 <Gauge
                   name="g6"
+                  max="200"
                   :key="this.outLight"
                   :value="this.outLight"
                 ></Gauge>
               </Card>
             </v-col>
             <v-col cols="6" md="3">
-              <Card avar="M" :title="$t('moisture.title')" :subtitle="$t('moisture.moistureOne') ">
+              <Card
+                avar="M"
+                max="200"
+                :title="$t('moisture.title')"
+                :subtitle="$t('moisture.moistureOne')"
+              >
                 <Gauge
                   name="g7"
+                  max="200"
                   :key="this.moistureOne"
                   :value="this.moistureOne"
                 ></Gauge
               ></Card>
             </v-col>
             <v-col cols="6" md="3">
-              <Card avar="M" :title="$t('moisture.title')" :subtitle="$t('moisture.moistureTwo')">
+              <Card
+                avar="M"
+                max="200"
+                :title="$t('moisture.title')"
+                :subtitle="$t('moisture.moistureTwo')"
+              >
                 <Gauge
                   name="g8"
+                  max="200"
                   :key="this.moistureTwo"
                   :value="this.moistureTwo"
                 ></Gauge>
               </Card>
             </v-col>
             <v-col cols="6" md="3">
-              <Card avar="M" :title="$t('moisture.title')" :subtitle="$t('moisture.moistureThree') ">
+              <Card
+                avar="M"
+                max="200"
+                :title="$t('moisture.title')"
+                :subtitle="$t('moisture.moistureThree')"
+              >
                 <Gauge
                   name="g9"
+                  max="200"
                   :key="this.moistureThree"
                   :value="this.moistureThree"
                 ></Gauge>
@@ -216,6 +278,7 @@ export default {
   created() {
     this.fetchData();
     this.fetchStandard();
+    this.fetchMeter();
   },
   mounted() {
     this.standard = this.showMoistureValue;
@@ -225,7 +288,7 @@ export default {
       loading: false,
       showMoistureValue: 0,
       standard: 0,
-      expand: [1, 2],
+      expand: [0,1,2,3,4],
       inHumidities: 0,
       outHumidities: 0,
       inLight: 0,
@@ -235,6 +298,9 @@ export default {
       moistureOne: 0,
       moistureTwo: 0,
       moistureThree: 0,
+      meterRate: 0,
+      meterQuantity: 0,
+      flow: false,
     };
   },
   methods: {
@@ -273,6 +339,14 @@ export default {
         .child("standard")
         .on("value", (snap) => {
           this.showMoistureValue = snap.val();
+        });
+    },
+    fetchMeter() {
+      db.database()
+        .ref("/meter")
+        .on("value", (snap) => {
+          this.meterRate = snap.val().meterRate;
+          this.meterQuantity = snap.val().meterQuantity;
         });
     },
   },

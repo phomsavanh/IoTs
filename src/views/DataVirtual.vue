@@ -112,7 +112,7 @@ export default {
                     : document.date.seconds * 1000
                 )
               );
-              one.push(Math.round(document[0].one));
+              document[0] != undefined?one.push(Math.round(document[0].one)):one.push(Math.round(document.one));
             } else {
               times.push(
                 this.formatDate(

@@ -10,7 +10,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <div v-if="title == 'Dashboard'">
+      <div v-if="title == 'Dashboard' || title == 'ໜ້າຫຼັກ'">
         <v-switch
           v-model="valve"
           class="mt-6"
@@ -22,6 +22,15 @@
             <strong class="white--text"> {{ text }} </strong>
           </template>
         </v-switch>
+      </div>
+      <div v-if="title == 'Melon' || title == 'ວິເຄາະເມລອນ'">
+        <v-btn
+          class="ma-2 white--text"
+          outlined
+          color="white"
+          to="/melon/detail"
+          >{{ $t("melon.detail") }}</v-btn
+        >
       </div>
     </v-app-bar>
     <!-- navigation-drawer -->
@@ -73,7 +82,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="white--text">
-                Logout
+                {{ this.$t("drawer.logout") }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -94,16 +103,16 @@ export default {
     // navBar,
     switcher,
   },
-  data() {
-    return {
-      miniVariant: false,
-      fix: true,
-      Expand: "Expand",
-      valve: null,
-      text: null,
-      title: "Dashboard",
-      showNav: false,
-      lists: [
+  computed: {
+    text() {
+      if (this.valve) {
+        return this.$t("valve.offValve");
+      } else {
+        return this.$t("valve.onValve");
+      }
+    },
+    lists() {
+      return [
         { icon: "dashboard", text: this.$t("drawer.dashboard"), route: "/" },
         { icon: "perm_media", text: this.$t("drawer.melon"), route: "/melon" },
         {
@@ -116,7 +125,17 @@ export default {
           text: this.$t("drawer.about"),
           route: "/about",
         },
-      ],
+      ];
+    },
+  },
+  data() {
+    return {
+      miniVariant: false,
+      fix: true,
+      Expand: "Expand",
+      valve: null,
+      title: "Dashboard",
+      showNav: false,
     };
   },
   methods: {
@@ -145,10 +164,10 @@ export default {
         .on("value", (snap) => {
           console.log(snap.val().valve);
           if (!snap.val().valve) {
-            this.text = "valve off";
+            this.text = this.$t("valve.offValve");
             this.valve = snap.val().valve;
           } else {
-            this.text = "valve on";
+            this.text = this.$t("valve.onValve");
             this.valve = snap.val().valve;
           }
         });

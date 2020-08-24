@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  props: ["name", "value"],
+  props: ["name", "value", "max"],
   data() {
     return {
       dflt: {
         min: 0,
-        max: 200,
+        max: this.max,
         donut: true,
         gaugeWidthScale: 0.5,
         counter: true,
@@ -37,6 +37,5 @@ export default {
 <style>
 .gauge {
   background-color: rgb(112, 134, 134);
-
 }
 </style>

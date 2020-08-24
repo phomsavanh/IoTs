@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="d-none d-sm-flex d-md-flex d-lg-flex d-xl-none">
-      <v-card class="mx-auto" width="90%" elevation="10">
+    <div class="d-none d-sm-flex d-md-flex d-lg-flex">
+      <v-card class="mx-auto" width="100%" elevation="10">
         <v-card-title class="orange  white--text ">
           {{ dates[carouselIndex] }}
         </v-card-title>

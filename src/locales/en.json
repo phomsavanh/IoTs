@@ -3,7 +3,9 @@
     "all": "All",
     "h&t": "Humidties & Temperature",
     "l&m": "Lights & Moistures",
-    "showStandard": "Moisture value is"
+    "showStandard": "Moisture value is",
+    "unit":"l/m",
+    "quantity":"Quantity of Water is"
   },
   "moisture": {
     "labelStandard": "Standard Moisture",
@@ -53,7 +55,8 @@
     "analyze": "Analyzed",
     "flowers": "Flowers",
     "melons": "Melons",
-    "leaves": "Leaves"
+    "leaves": "Leaves",
+    "detail":"All Data"
   },
   "drawer": {
     "dashboard": "Dashboard",

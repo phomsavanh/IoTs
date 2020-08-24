@@ -4,7 +4,7 @@
       <v-card class="mx-auto my-15" max-width="80%" elevation="20" dark>
         <v-row>
           <!-- poster -->
-          <v-col cols="12" md class="d-none d-lg-flex d-xl-none pa-5">
+          <v-col cols="12" md class="d-none d-lg-flex pa-5">
             <v-card-text>
               <v-img
                 src="https://www.crossroadsinfosec.com/wp-content/uploads/2019/02/1_lVfJFrxmv5WYXnfm7Tbf3A.png?quality=100.3017122710591"
@@ -27,7 +27,9 @@
               <!-- textfield -->
               <v-form
                 ref="form"
-                @keyup.enter="signIn()"
+                v-model="valid"
+                @submit="signUp()"
+                @keyup.enter="signUp()"
                 class="pa-5"
                 lazy-validation
               >
@@ -36,6 +38,7 @@
                   class="mb-5"
                   type="email"
                   label="E-mail"
+                  :rules="emailRules"
                   required
                 ></v-text-field>
 
@@ -43,8 +46,8 @@
                   type="password"
                   v-model="password"
                   label="password"
-                  width="50"
-                  @keyup.enter="signIn()"
+                  :rules="passwordRules"
+                  @keyup.enter="signUp()"
                   required
                 ></v-text-field>
                 <v-checkbox
@@ -58,7 +61,7 @@
                   <v-btn color="success" class="mr-4" @click="signUp()">
                     Sign Up
                   </v-btn>
-                  <v-btn color="error" class="mr-4" @click="back()" text>
+                  <v-btn color="gray" class="mr-4" @click="back()" text>
                     Sign in
                   </v-btn>
                 </v-card-actions>
@@ -86,7 +89,7 @@
                   v-model="password"
                   label="password"
                   width="50"
-                  @keyup.enter="signIn()"
+                  @keyup.enter="signUp()"
                   required
                 ></v-text-field>
                 <v-checkbox
@@ -110,6 +113,12 @@
         </v-row>
       </v-card>
     </v-skeleton-loader>
+     <v-overlay :value="loading">
+      <v-card class="pa-5">
+        <h5>Please wait a minute</h5>
+        <v-text-field color="" :loading="loading" disabled></v-text-field>
+      </v-card>
+    </v-overlay>
   </div>
 </template>
 
@@ -121,10 +130,18 @@ export default {
   data() {
     return {
       email: "",
+      emailRules:[
+        v=>!!v||'E-mail is required',
+        v=> /.+@+/.test(v) || 'E-mail is required',
+      ],
       password: "",
+      passwordRules:[
+        v=>v.length>=6||'password must be at least 6 character'
+      ],
       checkbox: false,
       loading: false,
       success: false,
+      valid:true
     };
   },
 
@@ -133,11 +150,32 @@ export default {
       this.$router.push("login");
     },
     async signUp() {
+      if (this.password.length < 6) {
+        setTimeout(() => {
+            alert("password must be at least 6 character");
+          }, 100);
+          return;
+      }
+      if (!this.email || !this.password) {
+         setTimeout(() => {
+            alert("email or password must not empty");
+          }, 100);
+          return;
+      }
+      this.loading = true
+      
       await firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          this.loading = false
           this.$router.push("/");
+        }).catch((err) => {
+          this.loading =false;
+          setTimeout(() => {
+            alert(err)
+          }, 100);
+          
         });
     },
   },

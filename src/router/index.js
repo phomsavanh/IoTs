@@ -6,6 +6,7 @@ import Register from "../views/Register.vue";
 import Melon from "../views/MelonData.vue";
 import Visualization from "../views/DataVirtual.vue"
 import DataTable from '../views/DataTable.vue'
+import Detail from "../views/MelonDetail.vue"
 
 import firebase from "../components/firebase-connect/firebaseInit";
 import "firebase/auth";
@@ -43,8 +44,14 @@ const routes = [
   },
   {
     path:"/visualization/:id",
-    name:"Visualization",
+    name:"all Visualization",
     component: DataTable,
+    meta: { requiresAuth: true },
+  },
+  {
+    path:"/melon/detail",
+    name:"melon detail",
+    component: Detail,
     meta: { requiresAuth: true },
   },
 
