@@ -5,7 +5,7 @@
     </v-btn>
     <v-card dark>
       <v-card-title>
-        test`
+        Melon Detail
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
@@ -30,11 +30,12 @@
 import db from "../components/firebase-connect/firebaseInit.js";
 export default {
   mounted() {
-    this.loading = true;
     this.fetchDetail();
   },
   methods: {
     fetchDetail() {
+      console.log("test");
+      this.loading = true;
       db.database()
         .ref("/melon")
         .orderByChild("timestamps")
@@ -51,7 +52,7 @@ export default {
             });
           });
         });
-        this.loading = false;
+      this.loading = false;
     },
   },
   data() {

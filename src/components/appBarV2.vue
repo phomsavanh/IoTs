@@ -12,6 +12,7 @@
 
       <div v-if="title == 'Dashboard' || title == 'ໜ້າຫຼັກ'">
         <v-switch
+          :key="value"
           v-model="valve"
           class="mt-6"
           :label="text"
@@ -106,9 +107,9 @@ export default {
   computed: {
     text() {
       if (this.valve) {
-        return this.$t("valve.offValve");
-      } else {
         return this.$t("valve.onValve");
+      } else {
+        return this.$t("valve.offValve");
       }
     },
     lists() {
@@ -133,8 +134,8 @@ export default {
       miniVariant: false,
       fix: true,
       Expand: "Expand",
+      title: "",
       valve: null,
-      title: "Dashboard",
       showNav: false,
     };
   },
@@ -163,11 +164,13 @@ export default {
         .ref("/pump")
         .on("value", (snap) => {
           console.log(snap.val().valve);
-          if (!snap.val().valve) {
-            this.text = this.$t("valve.offValve");
+          if (snap.val().valve === true) {
+            console.log(snap.val().valve);
+            this.text = this.$t("valve.onValve");
             this.valve = snap.val().valve;
           } else {
-            this.text = this.$t("valve.onValve");
+            console.log(snap.val().valve);
+            this.text = this.$t("valve.offValve");
             this.valve = snap.val().valve;
           }
         });
@@ -176,10 +179,13 @@ export default {
       db.database()
         .ref("/pump")
         .update({ valve: this.valve });
+      this.fetchData();
+
     },
   },
   mounted() {
     this.fetchData();
+    this.title = "Dashboard";
   },
 };
 </script>

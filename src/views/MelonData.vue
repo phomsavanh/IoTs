@@ -112,7 +112,7 @@ export default {
     fetchData() {
       db.database()
         .ref("/melon")
-        .limitToLast(5)
+        .limitToFirst(5)
         .orderByChild("timestamps")
         .on("value", (snap) => {
           this.urls.splice(0, this.urls.length);

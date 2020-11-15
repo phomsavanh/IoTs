@@ -288,7 +288,7 @@ export default {
       loading: false,
       showMoistureValue: 0,
       standard: 0,
-      expand: [0,1,2,3,4],
+      expand: [0,2,3,4],
       inHumidities: 0,
       outHumidities: 0,
       inLight: 0,

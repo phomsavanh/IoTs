@@ -5,7 +5,7 @@
     "l&m": "Lights & Moistures",
     "showStandard": "Moisture value is",
     "unit":"l/m",
-    "quantity":"Quantity of Water is"
+    "quantity":"Water used"
   },
   "moisture": {
     "labelStandard": "Standard Moisture",
